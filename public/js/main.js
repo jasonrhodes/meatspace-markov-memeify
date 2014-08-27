@@ -27,7 +27,10 @@
   var fileHandler = function(e) {
     var reader = new FileReader()
     reader.onloadend = function() {
+
+      document.querySelector('#preContent').style.display = "none";
       document.querySelector('#preview').appendChild(img)
+
       img.src = reader.result
       payload.content.type = e.target.files[0].type
       payload.content.data = reader.result

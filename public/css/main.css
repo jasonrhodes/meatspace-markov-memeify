@@ -2,7 +2,7 @@ body {
     width: 100%;
     margin: 0;
     font-size: 20px;
-    font-family: Avenir, "Helvetica Neue", helvetica, arial, sans-serif;
+    font-family: "Helvetica Neue", helvetica, arial, sans-serif;
     background: rgb(20,20,20);
     color: #fff;
 }
@@ -14,14 +14,50 @@ img {
 h1 {
     font-family: Impact, sans-serif;
     font-size: 5em;
-    text-align: center;
+    text-align: left;
+    margin-bottom: -10px;
     text-transform: uppercase;
     font-weight: normal;
+}
+
+a {
+    color: #FC65B1;
+    text-decoration: none;
+}
+
+h1 a {
+    color: #fff;
+}
+
+header .source {
+    line-height: 20px;
+    font-size: 12px;
+}
+
+.images {
+    text-align: center;
+    padding: 50px 0 10px;
+}
+
+.images img {
+    width: 30%;
+    height: auto;
+}
+
+.images .arrow {
+    font-size: 50px;
+    display: inline-block;
+    width: 15%;
 }
 
 .container {
     width: 800px;
     margin: 50px auto;
+}
+
+.form-container {
+    margin-top: 2em;
+    border-top: 2px solid rgba(255,255,255,0.2);
 }
 
 .msbtn {
