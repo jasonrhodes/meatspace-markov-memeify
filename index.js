@@ -50,6 +50,7 @@ function createMemeContext(canvas, options) {
   ctx.textBaseline = options.baseline || 'bottom';
   ctx.fillStyle = options.color || "#ffffff";
   ctx.strokeStyle = "#000000";
+  ctx.lineWidth = 2;
 
   return ctx;
 
