@@ -1,19 +1,24 @@
 {
-  "name": "glitch-api-example",
-  "version": "2.0.0",
+  "name": "memeify",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Jason Rhodes",
   "license": "GPL3",
   "dependencies": {
     "body-parser": "^1.6.2",
     "data-uri-to-buffer": "0.0.3",
     "express": "^4.8.2",
-    "glitch-jpg": "^1.0.4",
-    "nconf": "^0.6.9"
+    "nconf": "^0.6.9",
+    "canvas": "^1.1.6",
+    "markov": "0.0.7",
+    "socket.io-client": "~0.9.16",
+    "request": "^2.40.0",
+    "cheerio": "^0.17.0",
+    "sha1": "^1.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.2.1"
