@@ -49,6 +49,7 @@ function createMemeContext(canvas, options) {
   ctx.textAlign = options.align || 'left';
   ctx.textBaseline = options.baseline || 'bottom';
   ctx.fillStyle = options.color || "#ffffff";
+  ctx.strokeStyle = "#000000";
 
   return ctx;
 
@@ -81,7 +82,9 @@ app.post('/service', function(req, res) {
     });
 
     ctx.drawImage(img, 0, 0, img.width, img.height);
+
     ctx.fillText(text, (img.width - textInfo.width) / 2, img.height - 20);
+    ctx.strokeText(text, (img.width - textInfo.width) / 2, img.height - 20);
 
     var dataUri = canvas.toDataURL();
     req.body.content.data = dataUri;
