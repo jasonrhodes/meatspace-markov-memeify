@@ -24,7 +24,8 @@ function setFont(size, face) {
 
 function sizeTextToFit(ctx, text, img, options) {
 
-  var size = options.start || img.width / 2;
+  var half = img.width / 2;
+  var size = (half && (half > 100)) ? half : 100;
   var face = options.face || "Impact";
   var pad = options.pad || 60;
 
