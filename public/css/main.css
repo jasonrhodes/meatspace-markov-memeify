@@ -11,13 +11,20 @@ img {
     width: 100%;
 }
 
-h1 {
+header { text-align: center; }
+
+h1, h2 {
     font-family: Impact, sans-serif;
     font-size: 5em;
-    text-align: left;
+    /*text-align: left;*/
     margin-bottom: -10px;
     text-transform: uppercase;
     font-weight: normal;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin: 0 0 -0.2em;
 }
 
 a {
