@@ -9,7 +9,6 @@ var getPhrase = require("./lib/getPhrase");
 var Canvas = require("canvas");
 var Image = Canvas.Image;
 
-
 nconf.argv().env().file({ file: 'local.json'});
 
 app.use(bodyParser.json({ limit: '2mb' }));
@@ -29,13 +28,9 @@ function sizeTextToFit(ctx, text, img, options) {
   var face = options.face || "Impact";
   var pad = options.pad || 60;
 
-  console.log("font size", size);
-
   ctx.font = setFont(size, face);
 
   var info = ctx.measureText(text);
-
-  // console.log(info.width, img.width - pad, size);
 
   while (info.width >= (img.width - pad)) {
     size -= 5;
