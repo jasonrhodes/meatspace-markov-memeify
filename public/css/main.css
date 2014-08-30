@@ -14,7 +14,7 @@ img {
 header { text-align: center; }
 
 h1, h2 {
-    font-family: Impact, sans-serif;
+    font-family: "Impact", DINCondensed, "Roboto Condensed", AvenirNextCondensed, sans-serif;
     font-size: 5em;
     /*text-align: left;*/
     margin-bottom: -10px;
@@ -68,13 +68,15 @@ header .source {
 }
 
 .msbtn {
+    border: none;
+    cursor: pointer;
     margin-bottom: 10px;
-    padding: 5px 10px;
-    border-radius: 2px;
-    border-bottom: 2px solid #000;
-    border-right: 2px solid #000;
-    border-top: 2px solid #FFF;
+    padding: 20px 30px;
     background: #FC65B1;
     color: #000;
-    border-left: 2px solid #FFF;
+}
+
+button[type='submit'] {
+    font-size: 30px;
+    font-family: "Impact", DINCondensed, "Roboto Condensed", AvenirNextCondensed, sans-serif;
 }

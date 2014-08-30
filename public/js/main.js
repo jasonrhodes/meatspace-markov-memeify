@@ -10,9 +10,16 @@
   var submitHandler = function(e){
     e.preventDefault()
     var xhr = new XMLHttpRequest()
-    xhr.onreadystatechange = function(){
+
+    xhr.on('error', function (error) {
+      console.log(error);
+    })
+
+    xhr.onreadystatechange = function () {
       var parsed
+
       if (xhr.readyState === 4) {
+        console.log(xhr.responseCode);
         parsed = JSON.parse(xhr.responseText)
         img.src = parsed.content.data
       }
