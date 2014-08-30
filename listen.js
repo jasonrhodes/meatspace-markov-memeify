@@ -2,7 +2,7 @@ var fs          = require("fs");
 var shasum      = require("sha1");
 var redis       = require("redis");
 var client      = redis.createClient();
-var meatreader  = require("./lib/readmeats");
+var meatReader  = require("./lib/meatReader");
 var validations = require("./validations");
 
 client.on("error", function (err) {
@@ -15,8 +15,9 @@ validations.exclude = validations.exclude.map(function (v) {
 
 function save(message, info) {
 
+  var ttl = 60 * 60 * 24;
   var key = shasum(info.fingerprint + message);
-  client.set(key, message) && console.log("entered", message);
+  client.set(key, message, "EX", ttl) && console.log("entered", message);
 
 };
 
@@ -32,21 +33,14 @@ function validate(message) {
     }
   }
 
-  // valid ? console.log("yes", message) : console.log("no", message);
   return valid;
 
 };
 
-// fs.readFile("./validations.json", function (err, validations) {
+meatReader.connect();
 
-  meatreader.connect();
-
-  meatreader.on({
-    data: function(message, info) {
-      validate(message) && save(message, info);
-    }
-  });
-
-// });
-
-
+meatReader.on({
+  data: function(message, info) {
+    validate(message) && save(message, info);
+  }
+});
