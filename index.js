@@ -26,7 +26,13 @@ app.post('/service', function(req, res) {
 
   getPhrase(10, 3, function (error, phrase) {
 
-    if (error) return console.log(error);
+    // On error, pass through original image
+    if (error) {
+      console.log(error);
+      req.body.meta = req.body.meta || {};
+      req.body.meta.error = error;
+      return res.json(req.body);
+    }
 
     var text = phrase.toUpperCase();
     console.log("Text to add:", text);
