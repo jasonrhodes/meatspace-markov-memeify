@@ -4,59 +4,19 @@ var dataUriToBuffer = require('data-uri-to-buffer');
 var express = require('express');
 var app = express();
 var getPhrase = require("./lib/getPhrase");
-// var fs = require("fs");
+var memer = require("./lib/canvasMemer");
 
 var Canvas = require("canvas");
 var Image = Canvas.Image;
 
 nconf.argv().env().file({ file: 'local.json'});
 
-app.use(bodyParser.json({ limit: '2mb' }));
+app.use(bodyParser.json({ limit: '1mb' }));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
   res.sendFile( __dirname + '/index.html');
 });
-
-function setFont(size, face) {
-  return size + "px " + face;
-};
-
-function sizeTextToFit(ctx, text, img, options) {
-
-  var half = img.width / 2;
-  var size = (half && (half > 100)) ? half : 100;
-  var face = options.face || "Impact";
-  var pad = options.pad || 60;
-
-  ctx.font = setFont(size, face);
-
-  var info = ctx.measureText(text);
-
-  while (info.width >= (img.width - pad)) {
-    size -= 5;
-    ctx.font = setFont(size, face);
-    info = ctx.measureText(text);
-  }
-
-  return { size: size, width: info.width };
-
-}
-
-function createMemeContext(canvas, options) {
-
-  var ctx = canvas.getContext('2d');
-
-  ctx.textAlign = options.align || 'left';
-  ctx.textBaseline = options.baseline || 'bottom';
-  ctx.fillStyle = options.color || "#ffffff";
-  ctx.strokeStyle = "#000000";
-  ctx.lineWidth = 2;
-
-  return ctx;
-
-}
-
 
 app.post('/service', function(req, res) {
 
@@ -72,23 +32,23 @@ app.post('/service', function(req, res) {
     console.log("Text to add:", text);
 
     var canvas = new Canvas(img.width, img.height);
-    var ctx = createMemeContext(canvas, {
+    var ctx = memer.createMemeContext(canvas, {
       align: "left",
       baseline: "bottom",
       color: "#ffffff"
     });
 
-    var textInfo = sizeTextToFit(ctx, text, img, {
+    var textInfo = memer.sizeTextToFit(ctx, text, img, {
       pad: 60,
       face: "Impact"
     });
 
     ctx.drawImage(img, 0, 0, img.width, img.height);
-
     ctx.fillText(text, (img.width - textInfo.width) / 2, img.height - 20);
     ctx.strokeText(text, (img.width - textInfo.width) / 2, img.height - 20);
 
     var dataUri = canvas.toDataURL();
+
     req.body.content.data = dataUri;
     req.body.content.type = imgBuff.type;
     res.json(req.body);
